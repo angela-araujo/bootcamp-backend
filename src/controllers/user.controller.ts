@@ -8,7 +8,7 @@ interface UserResult {
     password?: string;
 }
 
-function view(req: Request, res: Response) {
+async function view(req: Request, res: Response) {
     const { id } = req.params;
 
     if (!id) {
@@ -17,19 +17,20 @@ function view(req: Request, res: Response) {
         })
     }
 
-    User.findById(id, (error: any, result: UserResult) => {
-        if (error) {
-            console.log(error);
-            res.status(500).json(error);
-        }
+    const user = await User.findById(id);
 
-        return res.status(200).json({
-            user: {
-                id: result._id,
-                name: result.name
-            }
+    if (!user) {
+        return res.status(404).json({
+            message: 'Usuário não encontrado'
         })
-    })
+    }
+
+    return res.status(200).json({
+        user: {
+            id: user._id,
+            name: user.name
+        }
+    });
 }
 
 async function destroy(req: Request, res: Response) {
