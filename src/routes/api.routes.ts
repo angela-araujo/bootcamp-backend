@@ -16,7 +16,7 @@ apiRouter.get('/users/id/:id', userController.view);
 apiRouter.post('/users/destroy/:id', userController.destroy);
 
 /* ROTAS DE SESSAO */
-apiRouter.post('/users/new', sessionController.create);
+apiRouter.post('/session/new', sessionController.create);
 
 /* ROTAS DE FILME */
 
