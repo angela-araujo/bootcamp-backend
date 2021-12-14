@@ -4,6 +4,7 @@ interface MovieDocument {
     name: String;
     category: String;
     description: String;
+    media_type: string;
     poster: string;
     backdrop?: String;
 }
@@ -19,6 +20,10 @@ const MovieSchema = new Schema(
             required: true
         },
         description: {
+            type: String,
+            required: true
+        },
+        media_type: {
             type: String,
             required: true
         },
