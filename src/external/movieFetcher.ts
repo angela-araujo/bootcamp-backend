@@ -102,4 +102,4 @@ function bulkCreate() {
     console.log('Criar em batch');
 }
 
-export { movieFetcher }
+export { movieFetcher, bulkCreate }

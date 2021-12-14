@@ -18,9 +18,9 @@ apiRouter.get('/', (req, res) => {
 
 /* ROTAS DE USUÁRIO */
 
+apiRouter.post('/users/new', userController.create);
 apiRouter.get('/users/id/:id', userController.view);
-apiRouter.post('/users/destroy/:id', userController.destroy);
-
+apiRouter.delete('/users/destroy/:id', userController.destroy);
 
 /* ROTAS DE SESSAO */
 
@@ -31,6 +31,8 @@ apiRouter.post('/session/new', sessionController.create);
 /* ROTAS DE FILME */
 
 apiRouter.get('/movies', movieController.index);
+apiRouter.get('/movies/id/:id', movieController.view);
+apiRouter.get('/movies/search/:search', movieController.search);
 apiRouter.post('/movies/new', movieController.create);
 
 /* ROTAS DE LIST */
