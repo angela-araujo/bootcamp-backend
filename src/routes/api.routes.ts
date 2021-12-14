@@ -30,8 +30,8 @@ apiRouter.post('/session/new', sessionController.create);
 
 /* ROTAS DE FILME */
 
-apiRouter.get('/movies', authorize, movieController.index);
-
+apiRouter.get('/movies', movieController.index);
+apiRouter.post('/movies/new', movieController.create);
 
 /* ROTAS DE LIST */
 
