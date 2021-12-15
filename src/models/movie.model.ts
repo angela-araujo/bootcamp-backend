@@ -1,8 +1,8 @@
 import { Document, Schema, model } from "mongoose";
 
 interface MovieDocument {
-    name: String;
-    category: String;
+    name: string;
+    category: string;
     description: String;
     media_type: string;
     poster: string;
