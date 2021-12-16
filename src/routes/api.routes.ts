@@ -24,7 +24,7 @@ apiRouter.delete('/users/destroy/:id', userController.destroy);
 
 /* ROTAS DE SESSAO */
 
-apiRouter.get('/session/new', authorize, sessionController.index);
+apiRouter.get('/session', authorize, sessionController.index);
 apiRouter.post('/session/new', sessionController.create);
 
 
