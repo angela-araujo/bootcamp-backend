@@ -24,6 +24,7 @@ function index(req: Request, res: Response) {
     });
 }
 
+/* Cria sessão  */
 async function create(req: Request, res: Response) {
     const { email, password } = req.body;
 
