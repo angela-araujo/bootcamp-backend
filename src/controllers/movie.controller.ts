@@ -64,7 +64,7 @@ function view(req: Request, res: Response) {
     });
 }
 
-/* Pesquisa pelo título do Filme */
+/* Pesquisa pelo nome e descrição do Filme */
 async function search(req: Request, res: Response) {
     const { search } = req.params;
 
