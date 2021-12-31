@@ -3,17 +3,18 @@ import { Document, Schema, model } from "mongoose";
 interface MovieDocument {
     name: string;
     category: string;
-    description: String;
+    description: string;
     media_type: string;
     poster: string;
-    backdrop?: String;
+    backdrop?: string;
 }
 
 const MovieSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         category: {
             type: String,

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Movie } from '../models/movie.model';
 import { paginate } from '../middlewares/pagination';
 
+/* Retorna lista de filmes paginada */
 function index(req: Request, res: Response) {
     const page: string = req.query.page as string;
 
@@ -19,6 +20,7 @@ function index(req: Request, res: Response) {
 
 }
 
+/* Cria um novo filme */
 async function create(req: Request, res: Response) {
     const { name, category, description, media_type, poster, backdrop } = req.body;
 
@@ -45,6 +47,7 @@ async function create(req: Request, res: Response) {
     });
 }
 
+/* Retorna um filme específico por id */
 function view(req: Request, res: Response) {
     const { id } = req.params;
 
@@ -61,12 +64,16 @@ function view(req: Request, res: Response) {
     });
 }
 
+/* Pesquisa pelo título do Filme */
 async function search(req: Request, res: Response) {
     const { search } = req.params;
 
+    // Regular expression g = global; i = case-insensitive
+    // result = /search/gi
     const regex = new RegExp(search, 'gi');
 
-    const result = await Movie.find({ name: regex }).catch(error => {
+    
+    const result = await Movie.find({ $or: [ {name: regex}, {description: regex}] }).catch(error => {
         console.log(error);
 
         return res.status(500).json({

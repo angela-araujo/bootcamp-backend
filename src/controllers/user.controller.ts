@@ -8,6 +8,7 @@ interface UserResult {
     password?: string;
 }
 
+/* Pega usuário pelo id */
 async function view(req: Request, res: Response) {
     const { id } = req.params;
 
@@ -33,6 +34,7 @@ async function view(req: Request, res: Response) {
     });
 }
 
+/* Cria novo usuário (name, email, password) */
 async function create(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
@@ -61,6 +63,7 @@ async function create(req: Request, res: Response) {
     });
 }
 
+/* Excluir usuário */
 async function destroy(req: Request, res: Response) {
     const { id } = req.params;
 
@@ -76,7 +79,7 @@ async function destroy(req: Request, res: Response) {
     
     if (!deleteUser) {
         res.status(500).json({
-            message: 'Não foi possível deletar o usuário'
+            message: 'Não foi possível deletar o usuário.'
         });
     }
 
