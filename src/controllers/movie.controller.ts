@@ -72,7 +72,7 @@ async function search(req: Request, res: Response) {
     // result = /search/gi
     const regex = new RegExp(search, 'gi');
 
-    
+    // array de objetos filme
     const result = await Movie.find({ $or: [ {name: regex}, {description: regex}] }).catch(error => {
         console.log(error);
 
@@ -81,7 +81,9 @@ async function search(req: Request, res: Response) {
         });
     });
 
-    if (!result) {
+    // Se retornar array result vazio
+    // @ts-ignore
+    if (result.length === 0) {
         return res.status(500).json({
             message: 'Não foi possível encontrar'
         });
