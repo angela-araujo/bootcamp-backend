@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import serveless from 'serverless-http';
 import { apiRouter } from './routes/api.routes';
 import { extRouter } from './routes/external.routes';
 
@@ -13,23 +14,12 @@ app.use(cors());
 app.use(apiRouter);
 app.use(extRouter);
 
-const ENV_VARS = {
-    port: process.env.PORT,
+export const ENV_VARS = {
     mongoURI: process.env.MONGO_URI,
     token_secret: process.env.TOKEN_SECRET
 }
 
-app.listen(ENV_VARS.port, async () => {
-
-    console.log('Server funcionando na porta: ', ENV_VARS.port);
-
-    if (ENV_VARS.mongoURI) {
-        mongoose.connect(ENV_VARS.mongoURI);
-    } else {
-        console.log('Erro na conexão com DB.');
-    }
-
-});
+mongoose.connect(ENV_VARS.mongoURI as string);
 
 
-export { ENV_VARS } 
+export const handler = serveless(app, { callbackWaitsForEmptyEventLoop: false });

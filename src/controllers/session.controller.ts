@@ -26,53 +26,59 @@ function index(req: Request, res: Response) {
 
 /* Cria sessão  */
 async function create(req: Request, res: Response) {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    const userExists = await User.findOne({ email });
-
-    if (!userExists) {
-        return res.status(403).json({
-            message: "Não foi possível autenticar."
-        })
-    }
-
-    const isValid = await userExists.comparePassword(password);
-
-    if (!isValid) {
-        return res.status(401).json({
-            message: 'Não foi possível autenticar.'
-        });
-    }
-
-    const accessToken = createAccessToken(userExists._id);
-
-    return res.status(200).json(
-        {
-            user: {
-                id: userExists._id,
-                name: userExists.name
-            },
-            accessToken
+        const userExists = await User.findOne({ email });
+    
+        if (!userExists) {
+            return res.status(403).json({
+                message: "Não foi possível autenticar."
+            })
         }
-    );
+    
+        const isValid = await userExists.comparePassword(password);
+    
+        if (!isValid) {
+            return res.status(401).json({
+                message: 'Não foi possível autenticar.'
+            });
+        }
+    
+        const accessToken = createAccessToken(userExists._id);
+    
+        return res.status(200).json(
+            {
+                user: {
+                    id: userExists._id,
+                    name: userExists.name
+                },
+                accessToken
+            }
+        );
+    } catch (error) {
+        return res.status(400).json(
+            {
+                status: error
+            }
+        );
+    }
 }
 
 function createAccessToken(userId: string) {
-
-    let token = ENV_VARS.token_secret as string;
     
-    const accessToken = jwt.sign(
+    return jwt.sign(
         {
             id: userId
         },
-        token,
+        ENV_VARS.token_secret as string,
         {
             // expiresIn: 900 // 15min
             expiresIn: 86400 // 1d
         }
     );
 
-    return accessToken;
+
 }
 
 export { create, index }
