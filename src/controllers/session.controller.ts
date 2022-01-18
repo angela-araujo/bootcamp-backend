@@ -6,22 +6,28 @@ import { ENV_VARS } from '../index';
 const token_secret = process.env.TOKEN_SECRET;
 
 function index(req: Request, res: Response) {
-
-    if (!req.headers.authorization) {
-        return res.status(401).json({
-            error: 'Usuário não autorizado '
+    try {
+        if (!req.headers.authorization) {
+            return res.status(401).json({
+                error: 'Usuário não autorizado '
+            });
+        }
+    
+        if (!req.user) {
+            return res.status(401).json({
+                error: 'Usuário não autorizado '
+            });
+        }
+    
+        return res.status(200).json({
+            userId: req.user
+        });
+    } catch (error) {
+        return res.status(400).json({
+                status: error
         });
     }
 
-    if (!req.user) {
-        return res.status(401).json({
-            error: 'Usuário não autorizado '
-        });
-    }
-
-    return res.status(200).json({
-        userId: req.user
-    });
 }
 
 /* Cria sessão  */
@@ -57,18 +63,15 @@ async function create(req: Request, res: Response) {
             }
         );
     } catch (error) {
-        return res.status(400).json(
-            {
+        return res.status(400).json({
                 status: error
-            }
-        );
+        });
     }
 }
 
 function createAccessToken(userId: string) {
     
-    return jwt.sign(
-        {
+    return jwt.sign({
             id: userId
         },
         ENV_VARS.token_secret as string,

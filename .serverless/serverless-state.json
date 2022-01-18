@@ -179,7 +179,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/bootcamp-backend/dev/1641941016458-2022-01-11T22:43:36.458Z/bootcamp-backend.zip"
+                "S3Key": "serverless/bootcamp-backend/dev/1642459234178-2022-01-17T22:40:34.178Z/bootcamp-backend.zip"
               },
               "Handler": "src/index.handler",
               "Runtime": "nodejs14.x",
@@ -203,14 +203,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionvZSLEC3fHofNo06sNtp5wcFKYXqCayznztfzG6YT5LM": {
+          "AppLambdaVersionzZ7mrtk6ol3zIPdOjwkz9Lgnw1znRzQ7uca12VxfVU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "5F+PaZ1YOXOhMaoADkPpo9ILYOzSyl/6vd5BIfoPEig="
+              "CodeSha256": "7WKGBAyoiV5aQIdMOFEPlMyo6qOiIPQyq6Yth6WBRdc="
             }
           },
           "ApiGatewayRestApi": {
@@ -428,7 +428,7 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1641940894637": {
+          "ApiGatewayDeployment1642459117651": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -493,7 +493,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionvZSLEC3fHofNo06sNtp5wcFKYXqCayznztfzG6YT5LM"
+              "Ref": "AppLambdaVersionzZ7mrtk6ol3zIPdOjwkz9Lgnw1znRzQ7uca12VxfVU"
             },
             "Export": {
               "Name": "sls-bootcamp-backend-dev-AppLambdaFunctionQualifiedArn"
@@ -679,7 +679,7 @@
         "timeout": 30,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionvZSLEC3fHofNo06sNtp5wcFKYXqCayznztfzG6YT5LM"
+        "versionLogicalId": "AppLambdaVersionzZ7mrtk6ol3zIPdOjwkz9Lgnw1znRzQ7uca12VxfVU"
       }
     },
     "configValidationMode": "warn",
@@ -703,7 +703,7 @@
     "artifact": "C:\\Users\\angela\\BootcampFullStack\\project\\backend\\.build\\.serverless\\bootcamp-backend.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/bootcamp-backend/dev/1641941016458-2022-01-11T22:43:36.458Z",
+    "artifactDirectoryName": "serverless/bootcamp-backend/dev/1642459234178-2022-01-17T22:40:34.178Z",
     "artifact": "bootcamp-backend.zip"
   }
 }
